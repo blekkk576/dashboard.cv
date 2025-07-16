@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Profil Saya</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- FOTO PROFIL -->
+    <div class="profile-photo">
+      <img id="profileImage" src="https://via.placeholder.com/150" alt="Foto Profil" />
+      <input type="file" id="uploadPhoto" accept="image/*" />
+    </div>
+
+    <!-- HEADER -->
+    <h1>Selamat Datang di Dashboard</h1>
+    <h2>Profil Saya</h2>
+
+    <!-- CV / PROFIL -->
+    <div class="card">
+      <h3>Tegar Prasetyo</h3>
+      <p><strong>Deskripsi:</strong> Saya adalah seorang pekerja dan web developer pemula yang sedang belajar HTML, CSS, dan JavaScript.</p>
+
+      <h4>Keahlian:</h4>
+      <ul>
+        <li>HTML & CSS</li>
+        <li>JavaScript Dasar</li>
+        <li>Desain Web Responsif</li>
+      </ul>
+
+      <h4>Pendidikan:</h4>
+      <p>SMA NEGERI 4 SEMARANG - 2022</p>
+
+      <h4>Pengalaman:</h4>
+      <p>Proyek pribadi membuat website login dan form input data</p>
+
+      <h4>Kontak:</h4>
+                <p>Email: tegarprasetyo581@gmail.com</p>
+    </div>
+
+    <!-- TOMBOL -->
+    <button onclick="logout()">Logout</button>
+    <button onclick="window.print()">🖨️ Cetak CV</button>
+
+  </div>
+
+  <!-- SCRIPT FOTO PROFIL + LOGOUT -->
+  <script>
+    function logout() {
+      window.location.href = "index.html";
+    }
+
+    const imageInput = document.getElementById("uploadPhoto");
+    const profileImg = document.getElementById("profileImage");
+
+    if (localStorage.getItem("profilePhoto")) {
+      profileImg.src = localStorage.getItem("profilePhoto");
+    }
+
+    imageInput.addEventListener("change", function () {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          profileImg.src = e.target.result;
+          localStorage.setItem("profilePhoto", e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+</body>
+</html>
